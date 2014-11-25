@@ -4,7 +4,7 @@
 
 using namespace seqan;
 
-int main() {
+void Basic() {
 
     unsigned alphSize = ValueSize<Dna>::VALUE;
     std::cout << "Aphabet size of Dna: " << alphSize << std::endl;
@@ -23,6 +23,36 @@ int main() {
     std::cout << "C: " << (unsigned)ordValue(c) << std::endl;
     std::cout << "G: " << (unsigned)ordValue(g) << std::endl;
     std::cout << "T: " << (unsigned)ordValue(t) << std::endl;
-    
+
+    return;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+template <typename Tbet>
+void ShowAllLettersOfMyAlphabet(Tbet const &) {
+
+    typedef typename Size<Tbet>::Type TSize;
+    TSize alphsize = ValueSize<Tbet>::VALUE;
+    for (TSize i = 0; i < alphsize; ++i) {
+        std::cout << i << ":" << Tbet(i) << " ";
+    }
+    std::cout << "\n";
+    return;
+}
+void ShowLetter() {
+
+    ShowAllLettersOfMyAlphabet(AminoAcid());
+    ShowAllLettersOfMyAlphabet(Dna());
+    ShowAllLettersOfMyAlphabet(Dna5());
+
+    return;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+int main() {
+
+    Basic();
+    ShowLetter();
     return 0;
 }
