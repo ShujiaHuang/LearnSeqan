@@ -1,0 +1,20 @@
+SRC=../src
+#CXXFLAGS+=-I/Users/LiuSiyang/iCodeSpace/Learn/Seqan/include/core
+#CXXFLAGS+=-I/Users/LiuSiyang/iCodeSpace/Learn/Seqan/include/extras
+CXXFLAGS+=-I../../include/core
+CXXFLAGS+=-I../../include/extras
+default: all
+all: main
+main: main.o
+
+	$(CXX) $(LDFLAGS) -o main main.o
+
+main.o: $(SRC)/main.cpp
+
+	$(CXX) $(CXXFLAGS) -c -o main.o $(SRC)/main.cpp
+
+clean:
+
+	rm -f main.o main
+
+.PHONY: clean
