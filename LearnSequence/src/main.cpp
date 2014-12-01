@@ -1,4 +1,6 @@
 #include <iostream>
+#include <time.h>
+
 #include <seqan/basic.h>
 #include <seqan/sequence.h>
 #include <seqan/file.h>
@@ -123,11 +125,51 @@ void Test_Conversions() {
     std::cout << target << "\n" << length(source) << "\n";
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
+void SeqInDepth() {
+
+    String<Dna> dnaSeq;
+    // Sets the capacity of dnaSeq to 5.
+    resize(dnaSeq, 4, Exact());
+    // Only "TATA" is assigned to dnaSeq, since dnaSeq is limited to 4.
+    assign(dnaSeq, "TATAGGGG", Limit());
+    std::cout << dnaSeq << "\n";
+    // Use the default expansion strategy.
+    append(dnaSeq, "GCGCGC");
+    std::cout << dnaSeq << "\n";
+ 
+    //////////////////////////////
+    std::cout << "\n** New Example **\n";
+    unsigned num = 1000000;
+    
+    time_t start;
+    String<Dna> str;
+    clear(str);
+    start = time(NULL);
+    for (size_t i(0); i < num; ++i) {
+        appendValue(str, 'A', Exact());
+    }
+    std::cout << "Strategy Exact() took: " << time(NULL) - start << "s \n\n";
+    clear(str);
+
+    start = time(NULL);
+    for (unsigned i(0); i < num; ++i) {
+        appendValue(str, 'A', Generous());
+        //appendValue(str, 'A');
+    }
+    std::cout << "Strategy Generous() took: " << time(NULL) - start << "s\n\n";
+   
+    return;
+}
+
+///////////////////////////////////////////////////////////////////////////////
 int main() {
 
     //BasicTest();
     //TestRevCompl();
     //Test_BS();
-    Test_Conversions();
+    //Test_Conversions();
+    SeqInDepth();
     return 0;
 }
