@@ -1,12 +1,12 @@
 #include <iostream>
-#include <seqan/basic.h>
-#include <seqan/sequence.h>
-#include <seqan/file.h>
+#include <seqan/sequence.h>  // CharString, ...
+#include <seqan/stream.h>    // to stream a CharString into cout
 
 using namespace seqan;
 
-int main() {
-
-    std::cout << CharString("Hello SeqAn!") << std::endl;
-    return 0;
+int main(int, char const **) {
+    std::cout << "Hello World!" << std::endl;
+    CharString mySeqAnString = "Hello SeqAn!";
+    std::cout << mySeqAnString << std::endl;
+    return 1;
 }

@@ -1,8 +1,5 @@
 SRC=../src
-#CXXFLAGS+=-I/Users/LiuSiyang/iCodeSpace/Learn/Seqan/include/core
-#CXXFLAGS+=-I/Users/LiuSiyang/iCodeSpace/Learn/Seqan/include/extras
-CXXFLAGS+=-I../../include/core
-CXXFLAGS+=-I../../include/extras
+CXXFLAGS+=-I../../include
 default: all
 all: main
 main: main.o

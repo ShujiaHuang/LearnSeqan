@@ -1,18 +1,29 @@
 #include <iostream>
 #include <seqan/sequence.h>
 #include <seqan/seq_io.h>
+#include <seqan/bam_io.h>
 
 using namespace seqan;
 
-void basic(int argc, char const **argv) {
+void bamIO(int argc, char const **argv) {
 
-    CharString id;
-    Dna5String seq;
+    // Open input file, BamFileIn can read SAM and BAM files.
+    BamFileIn bamFileIn(argv[1]);
+
+    // Open output file, BamFileOut accepts also an ostream and a format tag.
+    BamFileOut bamFileOut(std::cout, Sam());
     
-    SequenceStream seqStream(argv[1]);
-    readRecord(id, seq, seqStream);
-
-    std::cout << "\n>" << id << "\n\n" << seq << "\n";
+    // Copy header
+    BamHeader header;
+    readHeader(header, bamFileIn);
+    writeHeader(bamFileOut, header);
+    
+    // copy records
+    BamAlignmentRecord record;
+    while (!atEnd(bamFileIn)) {
+        readRecord(record, bamFileIn);
+        writeRecord(bamFileOut, record);
+    }
 
     return;
 }
@@ -25,6 +36,6 @@ int main(int argc, char const **argv) {
         return 1;
     }
 
-    basic(argc, argv);
+    bamIO(argc, argv);
     return 0;
 }
