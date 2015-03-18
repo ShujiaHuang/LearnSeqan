@@ -1,0 +1,6 @@
+c++: warning: couldn't understand kern.osversion '14.1.0
+../src/main.cpp: In function 'void bamIO(int, const char**)':
+../src/main.cpp:12:33: error: request for member 'c_str' in '*(argv + 8u)', which is of non-class type 'const char*'
+     BamFileIn bamFileIn(argv[1].c_str());
+                                 ^
+make: *** [main.o] Error 1
